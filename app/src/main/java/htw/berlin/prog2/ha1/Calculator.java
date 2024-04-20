@@ -7,11 +7,8 @@ package htw.berlin.prog2.ha1;
  * Enthält mit Absicht noch diverse Bugs oder unvollständige Funktionen.
  */
 public class Calculator {
-
     private String screen = "0";
-
     private double latestValue;
-
     private String latestOperation = "";
 
     /**
@@ -30,9 +27,7 @@ public class Calculator {
      */
     public void pressDigitKey(int digit) {
         if(digit > 9 || digit < 0) throw new IllegalArgumentException();
-
         if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
-
         screen = screen + digit;
     }
 
@@ -87,7 +82,6 @@ public class Calculator {
         screen = Double.toString(result);
         if(screen.equals("NaN")) screen = "Error";
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
-
     }
 
     /**
@@ -109,7 +103,13 @@ public class Calculator {
      * entfernt und der Inhalt fortan als positiv interpretiert.
      */
     public void pressNegativeKey() {
-        screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
+        if (screen.startsWith("-")) {
+            // If the screen starts with "-", remove the "-" to make it positive
+            screen = screen.substring(1);
+        } else {
+            // If the screen does not start with "-", add "-" at the beginning to make it negative
+            screen =  "-" + screen;
+        }
     }
 
     /**

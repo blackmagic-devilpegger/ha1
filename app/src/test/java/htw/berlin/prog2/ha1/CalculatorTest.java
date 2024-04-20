@@ -124,6 +124,22 @@ class CalculatorTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    @DisplayName("should add negative number")
+    void testNegativeAddition() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(3);
+        calc.pressNegativeKey();
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(8);
+        calc.pressEqualsKey();
+
+        String expected = "5"; //8
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
 
 }
 
